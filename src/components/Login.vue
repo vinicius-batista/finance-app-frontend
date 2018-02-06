@@ -67,7 +67,7 @@ export default {
         (v) => !!v || 'Password is required'
       ],
       valid: false,
-      errorMessage: 'test',
+      errorMessage: '',
       hasError: false
     }
   },
