@@ -16,28 +16,18 @@
 'use strict'
 
 import { mapActions } from 'vuex'
+import modal from './mixins/modal.js'
+
 export default {
   name: 'modal-delete-expense',
+  mixins: [modal],
   props: {
-    visibility: {
-      type: Boolean,
-      required: true
-    },
     id: {
       type: Number,
       required: true
     }
   },
-  data () {
-    return {
-      actualVisibility: this.visibility
-    }
-  },
   methods: {
-    close () {
-      this.actualVisibity = false
-      this.$emit('close')
-    },
     ...mapActions('expense', ['remove']),
     async destroy () {
       await this.remove(this.id)

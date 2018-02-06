@@ -42,20 +42,15 @@
 'use strict'
 
 import { mapGetters, mapActions } from 'vuex'
+import { email, name } from './mixins/rules'
 
 export default {
   name: 'user-info',
+  mixins: [email, name],
   data () {
     return {
       name: '',
       email: '',
-      nameRules: [
-        (v) => !!v || 'Name is required'
-      ],
-      emailRules: [
-        (v) => !!v || 'E-mail is required',
-        (v) => /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-      ],
       valid: false,
       errorMessage: '',
       hasError: false

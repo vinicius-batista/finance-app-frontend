@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="actualVisibity" full-width max-width="500" persistent>
+  <v-dialog v-model="actualVisibility" full-width max-width="500" persistent>
     <v-card>
       <v-alert type="error" v-model="hasError">
         {{ errorMessage }}
@@ -150,14 +150,13 @@
 
 import { split, ifElse, join, map, equals } from 'ramda'
 import { mapActions, mapGetters } from 'vuex'
+import modal from './mixins/modal'
+import { amount } from './mixins/rules'
 
 export default {
   name: 'modal-form-expense',
+  mixins: [modal, amount],
   props: {
-    visibility: {
-      type: Boolean,
-      required: true
-    },
     edit: {
       type: Boolean,
       default: false
@@ -189,7 +188,6 @@ export default {
   },
   data () {
     return {
-      actualVisibity: this.visibility,
       id: null,
       amount: '',
       description: '',
@@ -199,10 +197,6 @@ export default {
       category: '',
       menuVisibility: false,
       valid: false,
-      amountRules: [
-        this.notEmptyRule,
-        (v) => /^\$?(?!0\d)(?:\d+|\d{1,3}(?:,\d{1,3})*)(?:\.\d{2})?$/.test(v) || 'Incorrect format for money'
-      ],
       hasError: false,
       errorMessage: ''
     }
@@ -211,10 +205,6 @@ export default {
     ...mapGetters('expense', ['categories'])
   },
   methods: {
-    close () {
-      this.actualVisibity = false
-      this.$emit('close')
-    },
     formatDate (date) {
       const splitAndJoin = (date) => {
         const [year, month, day] = split('-', date)

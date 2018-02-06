@@ -8,7 +8,7 @@
         avatar 
         v-for="expense in expenses" 
         :key="expense.id" 
-        @click="showExpense(expense)"
+        @click.stop="showExpense(expense)"
       >
         <v-list-tile-avatar>
           <v-icon>{{ categoryIcon(expense.category) }}</v-icon>
@@ -24,10 +24,10 @@
                 <v-icon>more_vert</v-icon>
               </v-btn>
               <v-list>
-                <v-list-tile @click="editExpense(expense)">
+                <v-list-tile @click.stop="editExpense(expense)">
                   <v-icon>edit</v-icon>
                 </v-list-tile>
-                <v-list-tile @click="deleteExpense(expense.id)">
+                <v-list-tile @click.stop="deleteExpense(expense.id)">
                   <v-icon>delete</v-icon>
                 </v-list-tile>
               </v-list>

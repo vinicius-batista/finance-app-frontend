@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="actualVisibity" full-width max-width="500">
+  <v-dialog v-model="actualVisibility" full-width max-width="500">
     <v-card class="pa-3">
       <v-layout wrap>
         <v-flex xs6 md8>
@@ -38,38 +38,20 @@
 <script>
 'use strict'
 
-import { when, equals } from 'ramda'
+import modal from './mixins/modal'
 
 export default {
   name: 'modal-expense-show',
+  mixins: [modal],
   props: {
-    visibility: {
-      type: Boolean,
-      required: true
-    },
     expense: {
       type: Object,
       required: true
     }
   },
-  data () {
-    return {
-      actualVisibity: this.visibility
-    }
-  },
   methods: {
     categoryIcon (name) {
       return this.$store.getters['expense/categoryIcon'](name)
-    }
-  },
-  watch: {
-    actualVisibity (val) {
-      const isClose = when(
-        equals(false),
-        () => this.$emit('close')
-      )
-
-      isClose(val)
     }
   }
 }

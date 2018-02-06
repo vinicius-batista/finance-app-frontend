@@ -55,16 +55,14 @@
 'use strict'
 
 import { mapActions } from 'vuex'
+import { email } from './mixins/rules'
 
 export default {
+  mixins: [email],
   data () {
     return {
       email: '',
       password: '',
-      emailRules: [
-        (v) => !!v || 'E-mail is required',
-        (v) => /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-      ],
       passwordRules: [
         (v) => !!v || 'Password is required'
       ],

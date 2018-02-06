@@ -11,9 +11,8 @@ import router from './router'
 import store from './store'
 
 // use filters global
-import { formatDate, parseDate } from './util/filters'
+import { formatDate } from './util/filters'
 Vue.filter('formatDate', formatDate)
-Vue.filter('parseDate', parseDate)
 
 Vue.use(Vuetify)
 Vue.config.productionTip = false

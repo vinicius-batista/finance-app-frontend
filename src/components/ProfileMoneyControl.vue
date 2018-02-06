@@ -42,18 +42,16 @@
 'use strict'
 
 import { mapGetters, mapActions } from 'vuex'
+import { amount } from './mixins/rules'
 
 export default {
   name: 'money-control',
+  mixins: [amount],
   data () {
     return {
       valid: false,
       weeklyExpense: '',
       monthlyExpense: '',
-      amountRules: [
-        (v) => !!v || 'This field can\'t be empty',
-        (v) => /^\$?(?!0\d)(?:\d+|\d{1,3}(?:,\d{1,3})*)(?:\.\d{2})?$/.test(v) || 'Incorrect format for money'
-      ],
       errorMessage: '',
       hasError: false
     }

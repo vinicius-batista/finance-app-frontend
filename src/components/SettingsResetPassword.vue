@@ -47,22 +47,17 @@
 'use strict'
 
 import { mapActions } from 'vuex'
+import { password } from './mixins/rules'
 
 export default {
   name: 'reset-password',
+  mixins: [password],
   data () {
     return {
       oldPassword: '',
       newPassword: '',
       oldPasswordRules: [
         (v) => !!v || 'Old password is required'
-      ],
-      passwordRules: [
-        (v) => !!v || 'New password is required',
-        (v) => v.length >= 8 || 'Password must has at least 8 digits',
-        (v) => /^(?=.*[a-z]).+$/.test(v) || 'At least one character in lower case',
-        (v) => /^(?=.*[A-Z]).+$/.test(v) || 'At least one character in upper case',
-        (v) => /^(?=.*[0-9]).+$/.test(v) || 'At least one number'
       ],
       valid: false,
       errorMessage: '',

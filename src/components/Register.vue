@@ -51,27 +51,15 @@
 'use strict'
 
 import { mapActions } from 'vuex'
+import { email, password, name } from './mixins/rules'
 
 export default {
+  mixins: [email, password, name],
   data () {
     return {
       name: '',
       email: '',
       password: '',
-      nameRules: [
-        (v) => !!v || 'Name is required'
-      ],
-      emailRules: [
-        (v) => !!v || 'E-mail is required',
-        (v) => /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-      ],
-      passwordRules: [
-        (v) => !!v || 'Password is required',
-        (v) => v.length >= 8 || 'Password must has at least 8 digits',
-        (v) => /^(?=.*[a-z]).+$/.test(v) || 'At least one character in lower case',
-        (v) => /^(?=.*[A-Z]).+$/.test(v) || 'At least one character in upper case',
-        (v) => /^(?=.*[0-9]).+$/.test(v) || 'At least one number'
-      ],
       valid: false,
       errorMessage: '',
       hasError: false
