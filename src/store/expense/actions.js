@@ -1,7 +1,6 @@
 'use strict'
 
 import { store, paginate, update, destroy } from '@/services/expenses'
-import { forEach } from 'ramda'
 
 export default {
   async create ({ commit, dispatch }, expense) {
@@ -19,9 +18,7 @@ export default {
       const { data, lastPage } = response.data
 
       commit('UPDATE_PAGES', { page, lastPage })
-
-      const addNewExpense = (expense) => commit('ADD_PAGINATION', expense)
-      forEach(addNewExpense, data)
+      commit('ADD_PAGINATION', data)
     } catch (error) {
       throw error.response.data
     }

@@ -1,11 +1,11 @@
 'use strict'
 
-import { propEq, findIndex } from 'ramda'
+import { propEq, findIndex, concat, update } from 'ramda'
 
 export default {
-  ADD_PAGINATION (state, expense) {
+  ADD_PAGINATION (state, newExpenses) {
     const { expenses } = state
-    expenses.push(expense)
+    state.expenses = concat(newExpenses, expenses)
   },
   UPDATE_PAGES (state, pages) {
     state.page = pages.page
@@ -16,10 +16,9 @@ export default {
     const { id } = expense
     const matchId = propEq('id', id)
     const index = findIndex(matchId)(expenses)
-    expenses.splice(index, 1, expense)
+    state.expenses = update(index, expense, expenses)
   },
   REMOVE_ALL (state) {
-    const { expenses } = state
-    expenses.splice(0)
+    state.expenses = []
   }
 }
