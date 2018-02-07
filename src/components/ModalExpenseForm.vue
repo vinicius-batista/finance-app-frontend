@@ -84,6 +84,7 @@
                   :nudge-right="40" 
                   max-width="290px" 
                   min-width="290px"
+                  :disabled="edit"
                 >
                   <v-text-field 
                     slot="activator" 
@@ -92,6 +93,7 @@
                     prepend-icon="event" 
                     @blur="date = parseDate(dateFormated)"
                     :rules="[notEmptyRule]"
+                    :disabled="edit"
                   ></v-text-field>
                   <v-date-picker 
                     v-model="date" 
